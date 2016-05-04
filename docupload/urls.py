@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^editor_choice/$', views.editor_choice, name='editor_choice'),
     url(r'^editor_choice/markdown$', views.markdown_editor, name='markdown_editor'),
     url(r'^editor_choice/wsyiwyg$', views.wsyiwyg_editor, name='wsyiwyg_editor'),
+    url(r'^(?P<doc_id>\d+)/$', views.display, name='upload'),
 ]
