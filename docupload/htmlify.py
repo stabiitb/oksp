@@ -54,7 +54,7 @@ class HTMLifier():
         ext = file_name.split('.')[-1]
         file_name = file_name[:len(file_name) - len(ext) - 1]
         doc_dir = self.doc_base_path
-
+        html = ''
         if ext[:3] == 'doc':
             html = doc_convert(doc_file)
         elif ext in ('md', 'markdown'):

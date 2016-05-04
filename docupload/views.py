@@ -2,7 +2,7 @@ import os
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-
+from django.shortcuts import render
 from .forms import DocUploadForm
 from .htmlify import HTMLifier
 from .models import Documentation
@@ -21,16 +21,24 @@ def index(request):
         'doc_list': doc_list,
         'form': form,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request,"docupload/index.html", context)
 
+def editor_choice(request):
+    return render(request, "docupload/editor_choice.html")
 
-def upload(request):
+def markdown_editor(request):
+    return render(request, "docupload/markdown.html")
+
+def wsyiwyg_editor(request):
+    return render(request, "docupload/wsyiwyg.html")
+
+def upload(request): 
     '''View for /doc/upload/'''
 
     html = HTMLifier(doc_base_path=DOC_DIR)
 
     if request.method == 'POST':
-        form = DocUploadForm(request.POST, request.FILES)
+        form = DocUploadForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             html.convert(request.FILES['doc_file'])
     return HttpResponseRedirect('/doc/')
