@@ -1,19 +1,4 @@
 {% extends "docupload/base.html" %}
-<!--<form name="docupload" action="{% url 'docupload:upload' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
-\<hr><br>
-{% if doc_list %}
-    <ul>
-    {% for doc in doc_list %}
-        <li><a href="/doc/{{ doc.id }}/">{{ doc.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No docs are available.</p>
-{% endif %}-->
 
 {% block bar %}
 	<div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin: 0; padding: 0">
@@ -25,7 +10,7 @@
 	<div class="container-fluid" style="margin: 0; padding: 0;">	
 		<div class="jumbotron">
 			<h3>Fill out the Details</h3>
-			<form method='post' action="{% url 'docupload:upload' %}" enctype="multipart/form-data" role="form">{% csrf_token %}
+			<form method='post' action="{% url 'docupload:upload' %}" enctype="multipart/form-data" role="form" class="form-inline">{% csrf_token %}
 				<div class="form-group">
 					<label>Title:</label>
 					{{ form.name }}	
@@ -36,26 +21,28 @@
 				</div>
 				<input type = 'submit' class = 'btn btn-primary' value='Submit' />
 			</form>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row">
-			{% if doc_list %}
-				{% for doc in doc_list %}
-					<div class="col-sm-6">
-					    <div class="thumbnail">
-					      <!--<img src="..." alt="...">-->
-					      <div class="caption">
-					        <h3><a href='/docs/{{ doc.id }}/'>{{ doc.name }} </a></h3>
-					      </div>
-					    </div>
-					</div>
+			<hr/>
+			<div class="container">
+				<div class="row">
+						{% if doc_list %}
+							{% for doc in doc_list %}
+								<div class="col-sm-6">
+								    <div class="thumbnail">
+								      <!--<img src="..." alt="...">-->
+								      <div class="caption">
+								        <h3><a href='/docs/{{ doc.id }}/'>{{ doc.name }} </a></h3>
+								      </div>
+								    </div>
+								</div>
 
-					{% cycle "" "<div class = 'col-sm-12'><hr/></div></div><div class='row'>" %}
-				{% endfor %}
-			{% else %}
-			    <h3>No docs are available.</h3>
-			{% endif %}
+								{% cycle "" "<div class = 'col-sm-12'><hr/></div></div><div class='row'>" %}
+							{% endfor %}
+						{% else %}
+						    <h3>No docs are available.</h3>
+						{% endif %}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock content %}
