@@ -7,7 +7,10 @@
 
 {% block style %}
   .well {
-   background: white;
+    background: white;
+  }
+  body {
+    background: black;
   }
 {% endblock style %}
 
@@ -18,9 +21,9 @@
 {% endblock bar %}
 
 {% block content %}	
-	<div class="jumbotron">
+	<div class="jumbotron" style="background: black;">
 		<div class="container">
-	   <h1 style="text-align: center;">Markdown Editor</h1>
+	   <h1 style="text-align: center; color: white;">Markdown Editor</h1>
 	  </div>
     <textarea id="sourceTA" rows="25" style="width: 49%; display: inline-block;" class="well" placeholder="Start writing here"></textarea>
     <div id='targetDiv' style="float: right; width: 49%; overflow: scroll; height: 38.5em;" class="well"></div>

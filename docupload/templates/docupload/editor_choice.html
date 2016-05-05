@@ -1,5 +1,11 @@
 {% extends "docupload/base.html" %}
 
+{% block style %}
+	body {
+		background:black;
+	}
+{% endblock style %}
+
 {% block bar %}
 	<div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin: 0; padding: 0">
 		<a class="navbar-brand" rel="home" href='#' title="OKSP">OKSP</a>
@@ -7,10 +13,10 @@
 {% endblock bar %}
 
 {% block content %}	
-	<div class="jumbotron text-center">
+	<div class="jumbotron text-center" style="background: black;">
 		<div class="container">
-	        <h1>OKSP Editor</h1>
-	        <p>Welcome to the documentation upload portal.<br/>Please choose the editor of your choice. We support Markdown as well as WYSIWYG (eg MS Word, Google Docs)</p>
+	        <h1 style="color:white;">OKSP Editor</h1>
+	        <p style="color:white">Welcome to the documentation upload portal.<br/>Please choose the editor of your choice. We support Markdown as well as WYSIWYG (eg MS Word, Google Docs)</p>
 	        <span style="margin-right: 2em;"><a class="btn btn-info btn-lg" href="{% url 'docupload:markdown_editor' %}" role="button">Markdown &raquo;</a></span>
 	        <span style="margin-left: 2em;"><a class="btn btn-info btn-lg" href="{% url 'docupload:wsyiwyg_editor' %}" role="button">WYSIWYG &raquo;</a></span>
 	    </div>

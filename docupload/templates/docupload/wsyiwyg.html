@@ -1,5 +1,11 @@
 {% extends "docupload/base.html" %}
 
+{% block style %}
+    body {
+        background: black;
+    }
+{% endblock style %}
+
 {% block jslink %}
     <script src="//cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>	
 {% endblock jslink %}
@@ -12,13 +18,16 @@
 {% endblock bar %}
 
 {% block content %}	
-    <div class="jumbotron">
-        <h1 style="text-align: center;">WSYIWYG Editor</h1>
+    <div class="jumbotron" style="background: black;">
+        <h1 style="text-align: center; color: white;">WSYIWYG Editor</h1>
         <hr/>
         <textarea name="editor1"></textarea>
         <script>
             CKEDITOR.replace( 'editor1' );
+            CKEDITOR.config.width = '100%';
+            CKEDITOR.config.height = 500;
         </script>     
+        <hr/>
     </div>
 	
 {% endblock content %}
