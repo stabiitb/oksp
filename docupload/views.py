@@ -1,10 +1,10 @@
 import os
-
 from datetime import datetime
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
 from django.shortcuts import render
+from django.template import loader
+
 from .forms import DocUploadForm
 from .htmlify import HTMLifier
 from .models import Documentation
@@ -57,4 +57,3 @@ def display(request, doc_id):
 
     with open('docupload/docs/' + str(db_doc.doc_file)) as doc:
         return HttpResponse(doc)
-
