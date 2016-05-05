@@ -2,6 +2,7 @@ from django import forms
 
 from .models import Documentation
 
+
 class DocUploadForm(forms.ModelForm):
 	'''Form for documentation file upload'''
 	class Meta(object):
