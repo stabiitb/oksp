@@ -55,6 +55,6 @@ def display(request, doc_id):
 
     db_doc = Documentation.objects.filter(id=doc_id)[0]
 
-    with open('docupload/docs/' + db_doc.doc_file) as doc:
+    with open('docupload/docs/' + str(db_doc.doc_file)) as doc:
         return HttpResponse(doc)
 

@@ -9,7 +9,6 @@ class DocUploadForm(forms.ModelForm):
 		fields = [
 			"name",
 			"doc_file", 
-			"pub_date",
 		]
 		widgets = {
 			'name': forms.TextInput(attrs={'placeholder': 'Enter Title','class': 'form-control'}),
