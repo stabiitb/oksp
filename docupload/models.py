@@ -1,8 +1,5 @@
 from django.db import models
 
-
-# Create your models here.
-
 class Documentation(models.Model):
     '''
     Documentation: Model class which holds details of uploaded documentation file

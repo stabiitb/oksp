@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^doc/', include('docupload.urls', namespace='docupload')),
     url(r'^admin/', admin.site.urls),
+    url(r'^hacker-news/', include('hacker_news.urls', namespace='hacker-news')),
 ]
