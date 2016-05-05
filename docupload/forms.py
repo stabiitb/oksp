@@ -8,13 +8,9 @@ class DocUploadForm(forms.ModelForm):
 		model = Documentation
 		fields = [
 			"name",
-			"doc_file",
+			"doc_file", 
+			"pub_date",
 		]
 		widgets = {
 			'name': forms.TextInput(attrs={'placeholder': 'Enter Title','class': 'form-control'}),
-			'doc_file': forms.ClearableFileInput(attrs={'class': 'form-control'}),
 		}
-	doc_file = forms.FileField(
-			label = 'Select a file',
-			help_text = 'max. 5 megabytes',
-		)
