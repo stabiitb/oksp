@@ -1,4 +1,4 @@
-#!/home/darknight/Desktop/oksp/venv/bin/python
+#!/home/darknight/Desktop/oksp/myvenv/bin/python
 
 import sys
 import getopt
