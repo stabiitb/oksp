@@ -1,3 +1,6 @@
 {% extends "hacker-news/header.html" %}
 {% block content %}
-{%  endblock %}
+	{% for obj in news %}
+		<a href="{{ obj.link }}">{{ obj.title }}</a>
+	{% endfor %}
+{%  endblock content %}

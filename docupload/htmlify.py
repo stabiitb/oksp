@@ -41,6 +41,6 @@ class HTMLifier():
         html = get_html(doc_file)
 
         with open(doc_dir + file_name + '.html', 'wb') as doc_stored:
-            doc_stored.write(bytes(html))
+            doc_stored.write(bytes(html, 'utf-8'))
 
         return file_name + '.html'
