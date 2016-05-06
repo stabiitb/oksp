@@ -17,5 +17,5 @@ DB_HOST_NAME = 'localhost'
 DB_PORT = '5432'
 
 ADMINS_EMAIL_LIST = [
-    # ('Name', 'email@example.com'),
+     # ('Name', 'email@example.com'),
 ]
