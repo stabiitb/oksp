@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from .forms import NewsUploadForm
 
 from hacker_news.models import News
+
+from .forms import NewsUploadForm
 
 
 class NewsListView(ListView):
@@ -27,5 +28,3 @@ def upload(request):
         "form": form,
     }
     return render(request, "hacker-news/news_upload.html", context) 
-
-

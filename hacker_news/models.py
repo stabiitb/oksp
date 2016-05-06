@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class News(models.Model):
     '''
     News: Model class which holds all the shared links
