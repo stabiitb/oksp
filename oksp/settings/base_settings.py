@@ -98,10 +98,10 @@ USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_ROOT = 'static'
 
 STATICFILES_DIRS = (
     # Add all static files here. use os.path.join(BASE_DIR, 'your/staticfile/path')
+    os.path.join(BASE_DIR, "static"),
 )
 
 STATIC_URL = '/static/'

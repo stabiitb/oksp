@@ -13,5 +13,5 @@ class NewsUploadForm(forms.ModelForm):
         ]
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Enter Title','class': 'form-control'}),
-            'link': forms.URLInput(attrs={'class': 'form-control'}),
+            'link': forms.URLInput(attrs={'placeholder': 'For eg: https://www.google.co.in', 'class': 'form-control'}),
         }

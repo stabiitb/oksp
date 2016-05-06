@@ -1,6 +1,31 @@
 {% extends "hacker-news/header.html" %}
+{% load staticfiles %}
 {% block content %}
-	{% for obj in news %}
-		<a href="{{ obj.link }}">{{ obj.title }}</a>
-	{% endfor %}
+    {% for obj in news %}
+        <div class="col-sm-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div class="container">
+                        <h3>
+                            <a href="{{ obj.link }}">{{ obj.title }}</a>
+                            <p class="pull-right">{{ obj.upvotes }}</p>
+                            <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
+                                <div style="margin-bottom: 0.2em;">
+                                    <a href='{% url "hacker-news:update" obj.id %}'>
+                                        <img src="{% static 'hacker-news/img/upvote.png' %}"/>
+                                    </a>
+                                </div>
+
+                                <div style="margin-top: 0.2em;">
+                                    <a href='{% url "hacker-news:update" obj.id %}'>
+                                        <img src="{% static 'hacker-news/img/downvote.png' %}"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </h3> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {%  endblock content %}
