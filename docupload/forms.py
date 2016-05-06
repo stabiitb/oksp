@@ -8,7 +8,7 @@ class DocUploadForm(forms.ModelForm):
     class Meta(object):
         model = Documentation
         fields = [
-            "name",
+            "name", 
             "doc_file", 
         ]
         widgets = {
