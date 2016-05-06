@@ -1,12 +1,12 @@
 from django import forms
 
-from .models import News
+from .models import New
 
 
 class NewsUploadForm(forms.ModelForm):
     '''Form for news link upload'''
     class Meta(object):
-        model = News
+        model = New
         fields = [
             'title',
             'link',

@@ -1,13 +1,15 @@
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from hacker_news.models import News
+from hacker_news.models import New
 
 from .forms import NewsUploadForm
 
 
 class NewsListView(ListView):
-    queryset = News.objects.order_by("-date")[:10]
+    queryset = New.objects.order_by("-date")[:10]
     template_name = 'hacker-news/news.html'
     context_object_name = 'news'
 
@@ -22,8 +24,7 @@ def upload(request):
     if form.is_valid():
         instance = form.save(commit=False) 
         instance.save()
-        #return HttpResponseRedirect("http://127.0.0.1:8000/resources/detail/%s" %str(instance.id))
-        return HttpResponseRedirect(reverse('news_list'))
+        return HttpResponseRedirect(reverse('hacker-news:news_list'))
     context = {
         "form": form,
     }
