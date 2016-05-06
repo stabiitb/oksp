@@ -146,3 +146,6 @@ staticfiles/*
 oksp/settings/conf.py
 
 docupload/docs/*
+
+#PyCharm local config
+.idea/*

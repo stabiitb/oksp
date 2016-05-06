@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block head_title %}OKSP{% endblock head_title %}</title> 
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href='{% static "css/base.css" %}' />
+        {% block csslink %}
+
+        {% endblock csslink %}
+        {% block jslink %}
+        
+        {% endblock jslink %}
+        <style>
+            .container-fluid .navbar .navbar-brand {
+                color: white;
+            }
+            {% block style %}
+            {% endblock style %}
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid" style="margin: 0; padding: 0">
+            {% block bar %}
+                    
+            {% endblock bar %}  
+        </div>
+        <div class="container-fluid" style="margin: 0; padding: 0">
+            {% block content %}
+                    
+            {% endblock content %}
+        </div>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    </body>
+</html>

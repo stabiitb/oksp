@@ -1,8 +1,8 @@
 import os
-
 from datetime import datetime
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.template import loader
 
 from .forms import DocUploadForm
@@ -23,16 +23,24 @@ def index(request):
         'doc_list': doc_list,
         'form': form,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request,"docupload/index.html", context)
 
+def editor_choice(request):
+    return render(request, "docupload/editor_choice.html")
 
-def upload(request):
+def markdown_editor(request):
+    return render(request, "docupload/markdown.html")
+
+def wsyiwyg_editor(request):
+    return render(request, "docupload/wsyiwyg.html")
+
+def upload(request): 
     '''View for /doc/upload/'''
 
     html = HTMLifier(doc_base_path=DOC_DIR)
 
     if request.method == 'POST':
-        form = DocUploadForm(request.POST, request.FILES)
+        form = DocUploadForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             filename = html.convert(request.FILES['doc_file'])
             doc = Documentation(name=request.POST['name'],
@@ -47,6 +55,5 @@ def display(request, doc_id):
 
     db_doc = Documentation.objects.filter(id=doc_id)[0]
 
-    with open('docupload/docs/' + db_doc.doc_file) as doc:
+    with open('docupload/docs/' + str(db_doc.doc_file)) as doc:
         return HttpResponse(doc)
-
