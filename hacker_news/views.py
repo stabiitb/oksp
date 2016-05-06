@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from .forms import NewsUploadForm
 
 from hacker_news.models import News
 
@@ -14,4 +15,17 @@ def register(request):
 
 def login(request):
     return render(request, 'hacker-news/login.html')
+
+def upload(request):
+    form = NewsUploadForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False) 
+        instance.save()
+        #return HttpResponseRedirect("http://127.0.0.1:8000/resources/detail/%s" %str(instance.id))
+        return HttpResponseRedirect(reverse('news_list'))
+    context = {
+        "form": form,
+    }
+    return render(request, "hacker-news/news_upload.html", context) 
+
 

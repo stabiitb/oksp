@@ -1,0 +1,21 @@
+{% extends "hacker-news/header.html" %}
+{% block content %}
+	<div class="container-fluid" style="margin: 0; padding: 0;">    
+        <div class="jumbotron">
+            <h3 style="text-align: center;">Fill out the Details</h3>
+            <form method='POST' action="" enctype="multipart/form-data" role="form">
+            	{% csrf_token %}
+                <div class="form-group">
+                    <label>Title:</label>
+                    {{ form.title }} 
+                </div>
+                <div class="form-group"> 
+                    <label>Link:</label>
+                    {{ form.link }}
+                </div>
+                <input type = 'submit' class = 'btn btn-primary' value='Submit' />
+            </form>
+            <hr/>
+        </div>
+    </div>
+{%  endblock content %}

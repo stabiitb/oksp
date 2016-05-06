@@ -6,6 +6,6 @@ class News(models.Model):
     '''
 
     title = models.CharField(max_length=300)
-    link = models.URLField
+    link = models.URLField(max_length=200)
     comments = models.IntegerField
     upvotes = models.IntegerField
