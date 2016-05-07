@@ -11,7 +11,7 @@ from oauth.exceptions import OAuthError
 from oauth.request import UserFieldAPIRequest
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 from .forms import NewsUploadForm, CommentForm
@@ -72,23 +72,23 @@ class SSOAuthorizationView(View):
 class NewsListView(ListView):
     queryset = News.objects.order_by("-date")[:10]
     template_name = 'hacker-news/news.html'
-    context_object_name = 'news'
+    context_object_name = 'News'
 
     def get(self, request, *args, **kwargs):
-        queryset = New.objects.order_by('id')
+        queryset = News.objects.order_by('id')
         context = locals()
         context[self.context_object_name] = queryset
         return render_to_response(self.template_name, context, context_instance=RequestContext(request))
 
+
 def news_detail(request, id=None):
-    instance = get_object_or_404(New, id = id)
+    instance = get_object_or_404(News, id = id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
-        form_obj = comment(text=request.POST.get('text'), link = instance)
+        form_obj = Comment(text=request.POST.get('text'), link = instance)
         form_obj.save()
         return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
     comments = instance.comment_set.all()
-
 
     context = {
         'news': instance,
@@ -97,11 +97,13 @@ def news_detail(request, id=None):
     }
     return render(request, 'hacker-news/news_detail.html', context) 
 
+
 def vote_update(request, id=None):
-    instance = get_object_or_404(New, id = id)
+    instance = get_object_or_404(News, id = id)
     instance.upvotes += 1
     instance.save()
     return HttpResponseRedirect(reverse('hacker-news:news_list'))
+
 
 def upload(request):
     form = NewsUploadForm(request.POST or None)

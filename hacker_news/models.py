@@ -26,9 +26,9 @@ class UserProfile(models.Model):
 
 
 class News(models.Model):
-    '''
+    """
     News: Model class which holds all the shared links
-    '''
+    """
 
     title = models.CharField(max_length=300)
     description = models.TextField()
@@ -41,6 +41,7 @@ class News(models.Model):
 
 class Comment(models.Model):
     text = models.TextField()
-    link = models.ForeignKey(New)
+    link = models.ForeignKey(News)
+
     def __str__(self):
         return self.text
