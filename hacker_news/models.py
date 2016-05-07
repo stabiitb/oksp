@@ -7,9 +7,16 @@ class New(models.Model):
     '''
 
     title = models.CharField(max_length=300)
+    description = models.TextField()
     link = models.URLField(max_length=200)
-    comments = models.IntegerField(default=0)
     upvotes = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.title
+
+
+class comment(models.Model):
+    text = models.TextField()
+    link = models.ForeignKey(New)
+    def __unicode__(self):
+        return self.text
