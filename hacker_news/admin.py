@@ -7,13 +7,17 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ['title']
     list_display_links = ['title']
     search_fields = ['title']
+    context_object_name = 'News'
+    
     class Meta:
         model = News
+
 
 class CommentsAdmin(admin.ModelAdmin):
     list_display = ['text']
     list_display_links = ['text']
     search_fields = ['text']
+
     class Meta:
         model = Comment
 

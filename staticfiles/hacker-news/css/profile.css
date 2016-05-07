@@ -1,0 +1,101 @@
+.oksp-profile-container {
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.oksp-profile-cover {
+    width: 100%;
+}
+
+.oksp-profile-user-thumbnail {
+    height: 240px;
+    margin-top: -160px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(60, 60, 60, 10);
+}
+
+.oksp-profile-images {
+    text-align: center;
+}
+
+.oksp-profile-user-information {
+    padding: 24px;
+}
+
+.oksp-profile-user-about {
+    padding: 16px;
+    font-size: 18px;
+    color: #777;
+    text-align: center;
+}
+
+.oksp-profile-user-information .name {
+    color: #898989;
+    text-align: center;
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
+.oksp-profile-user-information .nickname {
+    text-align: center;
+    font-size: 24px;
+    color: #F50057;
+}
+
+.oksp-profile-user-links {
+    padding: 24px;
+}
+
+.oksp-profile-user-links .item {
+    padding: 8px;
+    vertical-align: middle;
+}
+
+.oksp-profile-user-links .item img {
+    width: 28px;
+    height: 28px;
+    margin-right: 20px;
+}
+
+.oksp-profile-user-links .item a {
+    color: #78909C;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .oksp-profile-container {
+        border-radius: 0;
+        box-shadow: none;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .oksp-profile-cover {
+        border-radius: 0;
+    }
+
+    .oksp-profile-user-thumbnail {
+        height: 180px;
+        margin-top: -90px;
+    }
+
+    .oksp-profile-user-information .name {
+        font-size: 24px;
+    }
+
+    .oksp-profile-user-information .nickname {
+        font-size: 18px;
+    }
+
+    .oksp-profile-user-about {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .oksp-profile-user-thumbnail {
+        height: 140px;
+        margin-top: -70px;
+    }
+}

@@ -1,0 +1,136 @@
+.no-padding {
+    padding: 0;
+}
+
+.oksp-navbar {
+    padding: 18px;
+    background-color: #1565C0;
+    border-bottom: none;
+    box-shadow: 0 1px 5px rgba(50, 50, 50, 0.95);
+}
+
+.oksp-navbar-container {
+    background-color: #1565C0;
+}
+
+.body {
+    background-color: #313443;
+}
+
+.white-body {
+    background-color: #FFFFFF;
+}
+
+.gray-body {
+    background-color: #E0E0E0;
+}
+
+.oksp-main-sidebar {
+    display: flex;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    padding: 0;
+}
+
+.oksp-main-sidebar .item a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+}
+
+.oksp-main-sidebar .heading {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 16px;
+}
+
+.oksp-main-sidebar .item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.oksp-main-sidebar .item {
+    padding: 16px;
+}
+
+.navbar-nav li a,
+.navbar-toggle,
+.navbar-toggle .icon-bar {
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #ffffff !important;
+}
+
+.oksp-navbar-logo {
+    height: 24px;
+}
+
+.oksp-main-container {
+    padding-top: 86px;
+}
+
+.footer {
+    padding: 18px;
+    background-color: #0D47A1;
+    text-align: center;
+    font-size: 18px;
+}
+
+.footer .text-muted {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.oksp-main-sidebar .share a {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 4px 16px;
+    text-decoration: none;
+}
+
+.oksp-main-sidebar .share a img {
+    width: 28px;
+    height: 28px;
+}
+
+.oksp-main-sidebar .share a span {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 4px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 991px) {
+    .oksp-main-sidebar {
+        width: 100%;
+        padding: 8px;
+        flex-direction: row !important;
+        -ms-flex-direction: row !important;
+        -webkit-flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center;
+    }
+
+    .oksp-main-sidebar .heading {
+        visibility: collapse;
+        width: 0;
+        padding: 0;
+    }
+
+    .oksp-main-sidebar .share {
+        vertical-align: middle;
+    }
+
+    .oksp-main-sidebar .share a {
+        padding: 4px;
+        vertical-align: middle;
+        margin: auto;
+    }
+
+    .oksp-main-sidebar .share a span {
+        visibility: collapse;
+        width: 0;
+        padding: 0;
+    }
+}

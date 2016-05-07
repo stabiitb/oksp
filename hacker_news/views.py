@@ -1,11 +1,13 @@
+from typing import Tuple
+
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
-from django.views.generic import ListView
-from flask.views import View
+from django.views.generic import ListView, View, TemplateView
 
 from django.contrib import auth
 from django.contrib.auth.models import User, Group
 from hacker_news.models import News, UserProfile, Comment
+
 from oauth.authorization import Authorization
 from oauth.exceptions import OAuthError
 from oauth.request import UserFieldAPIRequest
@@ -24,7 +26,7 @@ class SSOAuthorizationView(View):
             if request.GET.get('next') != '' and request.GET.get('next') is not None:
                 return redirect(request.GET.get('next'))
             else:
-                return redirect(settings.LOGIN_REDIRECT_URL)
+                 return redirect(settings.LOGIN_REDIRECT_URL)
         try:
             token = Authorization(request).get_token()
         except OAuthError as e:
@@ -69,6 +71,27 @@ class SSOAuthorizationView(View):
             return redirect(settings.LOGIN_REDIRECT_URL)
 
 
+class UserProfileView(TemplateView):
+    template_name = 'profile/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.pop('pk', None)
+
+        if not pk:
+            if request.user.is_authenticated():
+                pk = request.user.id
+            else:
+                return redirect(reverse('index'))
+
+        user = get_object_or_404(
+                User,
+                pk=pk
+        )
+
+        kwargs['user'] = user
+        return super().get(request, *args, **kwargs)
+
+
 class NewsListView(ListView):
     queryset = News.objects.order_by("-date")[:10]
     template_name = 'hacker-news/news.html'
@@ -82,10 +105,10 @@ class NewsListView(ListView):
 
 
 def news_detail(request, id=None):
-    instance = get_object_or_404(News, id = id)
+    instance = get_object_or_404(News, id=id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
-        form_obj = Comment(text=request.POST.get('text'), link = instance)
+        form_obj = Comment(text=request.POST.get('text'), link=instance)
         form_obj.save()
         return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
     comments = instance.comment_set.all()
@@ -99,7 +122,7 @@ def news_detail(request, id=None):
 
 
 def vote_update(request, id=None):
-    instance = get_object_or_404(News, id = id)
+    instance = get_object_or_404(News, id=id)
     instance.upvotes += 1
     instance.save()
     return HttpResponseRedirect(reverse('hacker-news:news_list'))
