@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^vote-update/(?P<id>\d+)/$', views.vote_update, name='update'),
+    url(r'^detail/(?P<id>\d+)/$', views.news_detail, name='news_detail'),
 ]

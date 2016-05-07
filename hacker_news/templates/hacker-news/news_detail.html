@@ -1,0 +1,48 @@
+{% extends "hacker-news/header.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="col-sm-12">
+        <div class="thumbnail">
+            <div class="caption">
+                <div class="container">
+                    <h3>
+                        <a href="{{ news.link }}">{{ news.title }}</a>
+                        <p class="pull-right">{{ news.upvotes }}</p>
+                        <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
+                            <div style="margin-bottom: 0.2em;">
+                                <a href='{% url "hacker-news:update" news.id %}'>
+                                    <img src="{% static 'hacker-news/img/upvote.png' %}"/>
+                                </a>
+                            </div>
+
+                            <div style="margin-top: 0.2em;">
+                                <a href='{% url "hacker-news:update" news.id %}'>
+                                    <img src="{% static 'hacker-news/img/downvote.png' %}"/>
+                                </a>
+                            </div>
+                        </div>
+                    </h3>
+                    <div>
+                        {{ news.description }}    
+                    </div> 
+                    <hr/>
+                    <div class="well">
+                        <h3 style="text-align: center;">Comments</h3>
+                        {% for comment in comments %}
+                            <div class="well">
+                                {{ comment.text }}
+                            </div>
+                        {% endfor %}  
+                            <form method='POST' action="" enctype="multipart/form-data" role="form">
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    {{ form.text }} 
+                                </div>
+                            <button type = 'submit' class = 'btn btn-success'>Comment</button>
+                        </form>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endblock content %}
