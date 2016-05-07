@@ -29,18 +29,33 @@
                     <div class="well">
                         <h3 style="text-align: center;">Comments</h3>
                         {% for comment in comments %}
-                            <div class="well">
-                                {{ comment.text }} <hr/>
-                                <a href="#">Reply</a>
+                            <div class="well" style="background: #A9A9A9;">
+                                <h4>{{ comment.text }}</h4>
+                                <hr/>
+                                <h3>Replies</h3>
+                                {% for reply_comment in reply_comments%}
+                                    <div class="well" style="margin-top: 0; margin-bottom: 0;">
+                                        {{ reply_comment.text }}
+                                    </div>
+                                {% endfor %}
+                                <hr/>
+                                <form method='POST' action="" enctype="multipart/form-data" role="form">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{ reply.text }} 
+                                    </div>
+                                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                    <button type = 'submit' class = 'btn btn-danger' name="recursive_comment">Reply</button>
+                                </form>  
                             </div>
                         {% endfor %}  
                         <form method='POST' action="" enctype="multipart/form-data" role="form">
-                        {% csrf_token %}
+                            {% csrf_token %}
                             <div class="form-group">
                                 {{ form.text }} 
                             </div>
-                            <button type = 'submit' class = 'btn btn-success'>Comment</button>
-                        </form>  
+                            <button type = 'submit' class = 'btn btn-success' name="Comment">Comment</button>
+                        </form> 
                     </div>
                 </div>
             </div>

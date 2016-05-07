@@ -6,7 +6,7 @@ from django.views.generic import ListView
 
 from hacker_news.models import New, comment
 
-from .forms import NewsUploadForm, CommentForm
+from .forms import CommentForm, NewsUploadForm
 
 
 class NewsListView(ListView):
@@ -22,17 +22,27 @@ class NewsListView(ListView):
 def news_detail(request, id=None):
     instance = get_object_or_404(New, id = id)
     form = CommentForm(request.POST or None)
-    if form.is_valid():
-        form_obj = comment(text=request.POST.get('text'), link = instance, comment_link=None)
-        form_obj.save()
-        return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
-    comments = instance.comment_set.all()
-
+    reply = CommentForm(request.POST or None)
+    if 'Comment' in request.POST:
+        if form.is_valid():
+            form_obj = comment(text=request.POST.get('text'), link = instance, comment_link=None)
+            form_obj.save()
+            return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
+    else:
+        if reply.is_valid():
+            comment_instance = get_object_or_404(comment, id = request.POST.get('comment_id'))
+            form_obj = comment(text=request.POST.get('text'), link = instance, comment_link= comment_instance)
+            form_obj.save()
+            return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
+    comments = instance.comment_set.filter(comment_link=None)
+    reply_comments = instance.comment_set.filter(comment_link__isnull=False)
 
     context = {
         'news': instance,
         'comments': comments,
         'form': form,
+        'reply': reply,
+        'reply_comments': reply_comments,
     }
     return render(request, 'hacker-news/news_detail.html', context) 
 
