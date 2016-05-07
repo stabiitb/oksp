@@ -1,10 +1,7 @@
 from django.conf.urls import url
-
-from hacker_news import views
-from hacker_news.views import NewsListView
+from hacker_news.views import NewsListView, SSOAuthorizationView
 
 urlpatterns = [
     url(r'^$', NewsListView.as_view(), name='news_list'),
-    url(r'^register', views.register, name='register'),
-    url(r'^login', views.login, name='login'),
+    url(r'^authorization/$', SSOAuthorizationView.as_view("auth"), name='authorization'),
 ]

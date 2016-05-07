@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 INSTALLED_APPS = [
     'hacker_news',
+    'oauth',
     'docupload.apps.DocuploadConfig',
     'django.contrib.admin',
     'django.contrib.auth',
