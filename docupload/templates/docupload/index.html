@@ -1,15 +1,56 @@
-<form name="docupload" action="{% url 'docupload:upload' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
-<hr><br>
-{% if doc_list %}
-    <ul>
-    {% for doc in doc_list %}
-        <li><a href="/doc/{{ doc.id }}/">{{ doc.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No docs are available.</p>
-{% endif %}
+{% extends "docupload/base.html" %}
+
+{% block style %}
+    body {
+        background: black;
+    }
+    .form-group, h3 {
+        color: white;
+    }
+{% endblock style %}
+
+{% block bar %}
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin: 0; padding: 0">
+        <a class="navbar-brand" rel="home" href='#' title="OKSP">OKSP</a>
+    </div>
+{% endblock bar %}
+
+{% block content %}
+    <div class="container-fluid" style="margin: 0; padding: 0;">    
+        <div class="jumbotron" style="background: black;">
+            <h3 style="text-align: center;">Fill out the Details</h3>
+            <form method='POST' action="{% url 'docupload:upload' %}" enctype="multipart/form-data" role="form">{% csrf_token %}
+                <div class="form-group">
+                    <label>Title:</label>
+                    {{ form.name }} 
+                </div>
+                <div class="form-group"> 
+                    <label>File:</label>
+                    {{ form.doc_file }}
+                </div>
+                <input type = 'submit' class = 'btn btn-primary' value='Submit' />
+            </form>
+            <hr/>
+            <div class="container">
+                <div class="row">
+                    {% if doc_list %}
+                        {% for doc in doc_list %}
+                            <div class="col-sm-6" style="margin: 0; padding: 0;">
+                                <div class="thumbnail">
+                                  <!--<img src="..." alt="...">-->
+                                  <div class="caption">
+                                    <h3><a href='/doc/{{ doc.id }}/'>{{ doc.name }}<small> {{ doc.pub_date|timesince }} ago</small> </a></h3>
+                                  </div>
+                                </div>
+                            </div>
+
+                            {% cycle "" "<div class = 'col-sm-12'><hr/></div></div><div class='row'>" %}
+                        {% endfor %}
+                    {% else %}
+                        <h3>No docs are available.</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

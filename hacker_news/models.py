@@ -3,17 +3,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 
-class News(models.Model):
-    """
-    News: Model class which holds all the shared links
-    """
-
-    title = models.CharField(max_length=300)
-    link = models.URLField
-    comments = models.IntegerField
-    upvotes = models.IntegerField
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='user_profile')
     nickname = models.CharField(max_length=24, unique=True)
@@ -34,3 +23,24 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profile', args=[str(self.id)])
+
+
+class News(models.Model):
+    '''
+    News: Model class which holds all the shared links
+    '''
+
+    title = models.CharField(max_length=300)
+    description = models.TextField()
+    link = models.URLField(max_length=200)
+    upvotes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+
+class Comment(models.Model):
+    text = models.TextField()
+    link = models.ForeignKey(New)
+    def __str__(self):
+        return self.text
