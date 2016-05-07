@@ -30,14 +30,15 @@
                         <h3 style="text-align: center;">Comments</h3>
                         {% for comment in comments %}
                             <div class="well">
-                                {{ comment.text }}
+                                {{ comment.text }} <hr/>
+                                <a href="#">Reply</a>
                             </div>
                         {% endfor %}  
-                            <form method='POST' action="" enctype="multipart/form-data" role="form">
-                            {% csrf_token %}
-                                <div class="form-group">
-                                    {{ form.text }} 
-                                </div>
+                        <form method='POST' action="" enctype="multipart/form-data" role="form">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.text }} 
+                            </div>
                             <button type = 'submit' class = 'btn btn-success'>Comment</button>
                         </form>  
                     </div>

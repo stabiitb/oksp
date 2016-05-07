@@ -14,7 +14,7 @@ class NewsListView(ListView):
     context_object_name = 'news'
 
     def get(self, request, *args, **kwargs):
-        queryset = New.objects.order_by('id')
+        queryset = New.objects.order_by('-post_date')
         context = locals()
         context[self.context_object_name] = queryset
         return render_to_response(self.template_name, context, context_instance=RequestContext(request))
@@ -23,7 +23,7 @@ def news_detail(request, id=None):
     instance = get_object_or_404(New, id = id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
-        form_obj = comment(text=request.POST.get('text'), link = instance)
+        form_obj = comment(text=request.POST.get('text'), link = instance, comment_link=None)
         form_obj.save()
         return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
     comments = instance.comment_set.all()
