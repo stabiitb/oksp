@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^authorization/$', SSOAuthorizationView.as_view(), name='authorization'),
     url(r'^profile/(?P<pk>\d+)/$', UserProfileView.as_view(), name='profile'),
     url(r'^profile/$', UserProfileView.as_view(), name='self_profile'),
+    url(r'^profile/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/hacker-news/'}),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^vote-update/(?P<id>\d+)/$', views.vote_update, name='update'),
     url(r'^detail/(?P<id>\d+)/$', views.news_detail, name='news_detail'),

@@ -81,7 +81,7 @@ class UserProfileView(TemplateView):
             if request.user.is_authenticated():
                 pk = request.user.id
             else:
-                return redirect(reverse('index'))
+                return redirect(reverse('hacker-news:news_list'))
 
         user = get_object_or_404(
                 User,
