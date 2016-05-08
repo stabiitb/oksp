@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 
-
 class Documentation(models.Model):
     '''
     Documentation: Model class which holds details of uploaded documentation file
@@ -12,5 +11,5 @@ class Documentation(models.Model):
     doc_file = models.FileField(upload_to = '%s/media/' %settings.BASE_DIR)
     pub_date = models.DateTimeField('date published')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

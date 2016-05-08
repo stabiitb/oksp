@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 INSTALLED_APPS = [
     'hacker_news',
+    'oauth',
     'docupload.apps.DocuploadConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -98,10 +99,11 @@ USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     # Add all static files here. use os.path.join(BASE_DIR, 'your/staticfile/path')
     os.path.join(BASE_DIR, "static"),
 )
-
-STATIC_URL = '/static/'

@@ -33,10 +33,12 @@
                                 <h4>{{ comment.text }}</h4>
                                 <hr/>
                                 <h3>Replies</h3>
-                                {% for reply_comment in reply_comments%}
-                                    <div class="well" style="margin-top: 0; margin-bottom: 0;">
-                                        {{ reply_comment.text }}
-                                    </div>
+                                {% for reply_comment in reply_comments %}
+                                    {% if reply_comment.comment_link == comment %}
+                                        <div class="well" style="margin-top: 0; margin-bottom: 0;">
+                                            {{ reply_comment.text }}
+                                        </div>
+                                    {% endif %}
                                 {% endfor %}
                                 <hr/>
                                 <form method='POST' action="" enctype="multipart/form-data" role="form">
