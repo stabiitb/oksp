@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block main_container %}
+    <div class="container-fluid oksp-main-container">
+        <div class="row">
+            <div class="oksp-main-sidebar col-xs-12 col-md-2">
+                <div class="heading">Contact Me</div>
+                {% if user.user_profile.twitter != '' %}
+                    <div class="share">
+                        <a href="{{ user.user_profile.twitter }}" target="_blank">
+                            <img src="{% static 'hacker-news/img/twitter.png' %}">
+                            <span>Twitter</span></a>
+                    </div>
+                {% endif %}
+
+                {% if user.user_profile.facebook != '' %}
+                    <div class="share">
+                        <a href="{{ user.user_profile.facebook }}" target="_blank">
+                            <img src="{% static '/static/hacker-news/img/facebook.png' %}">
+                            <span>Facebook</span></a>
+                    </div>
+                {% endif %}
+
+                {% if user.user_profile.google != '' %}
+                    <div class="share"><a href="{{ user.user_profile.google }}" target="_blank">
+                        <img src="{% static 'hacker-news/img/google+.png' %}">
+                        <span>Google+</span></a>
+                    </div>
+                {% endif %}
+
+                {% if user.user_profile.blogger != '' %}
+                    <div class="share">
+                        <a href="{{ user.user_profile.blogger }}" target="_blank">
+                            <img src="{% static 'hacker-news/img/blogger.png' %}">
+                            <span>Blogger</span></a>
+                    </div>
+                {% endif %}
+
+                {% if user.user_profile.homepage != '' %}
+                    <div class="share">
+                        <a href="{{ user.user_profile.homepage }}" target="_blank">
+                            <img src="{% static 'hacker-news/img/html5.png' %}">
+                            <span>Homepage</span></a>
+                    </div>
+                {% endif %}
+
+                {% if user.email != '' %}
+                    <div class="share">
+                        <a href="{{ user.email }}" target="_blank">
+                            <img src="{% static 'hacker-news/img/gmail.png' %}">
+                            <span>Email</span></a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="oksp-profile-container col-xs-12 col-md-10">
+                <div class="oksp-profile-images">
+
+                    {% if user.user_profile.cover == null or user.user_profile.cover.name == '' %}
+                        <img class="oksp-profile-cover" src="{% static 'hacker-news/img/placeholder.png' %}"/>
+                    {% else %}
+                        <img class="oksp-profile-cover" src="{{ user.user_profile.cover.url }}"/>
+                    {% endif %}
+
+                    {% if user.user_profile.picture == null or user.user_profile.picture.name == '' %}
+                        <img class="oksp-profile-user-thumbnail" src="{% static 'hacker-news/img/face_placeholder.png' %}"/>
+                    {% else %}
+                        <img class="oksp-profile-user-thumbnail" src="{{ user.user_profile.picture.url }}"/>
+                    {% endif %}
+
+                </div>
+
+                <div class="oksp-profile-user-information">
+                    <div class="name">{{ user.first_name }} {{ user.last_name }}</div>
+                    <div class="nickname">@{{ user.user_profile.nickname }}</div>
+                </div>
+
+                <hr/>
+
+                {% if not user.user_profile.about == None and not user.user_profile.about == "None" %}
+                    <div class="oksp-profile-user-about">
+                        {{ user.user_profile.about }}
+                    </div>
+                    <hr/>
+                {% endif %}
+
+                <div class="oksp-profile-user-links">
+                    {% if user.user_profile.twitter %}
+                        <div class="item">
+                            <img src="{% static 'hacker-news/img/twitter.png' %}">
+                            <a href="{{ user.user_profile.twitter }}" target="_blank">Twitter Profile</a>
+                        </div>
+                    {% endif %}
+
+                    {% if user.user_profile.facebook %}
+                        <div class="item">
+                            <img src="{% static 'hacker-news/img/facebook.png' %}">
+                            <a href="{{ user.user_profile.facebook }}" target="_blank">Facebook Profile</a>
+                        </div>
+                    {% endif %}
+
+                    {% if user.user_profile.google %}
+                        <div class="item">
+                            <img src="{% static 'hacker-news/img/google+.png' %}">
+                            <a href="{{ user.user_profile.google }}" target="_blank">Google+ Profile</a>
+                        </div>
+                    {% endif %}
+
+                    {% if user.user_profile.blogger %}
+                        <div class="item">
+                            <img src="{% static 'hacker-news/img/blogger.png' %}">
+                            <a href="{{ user.user_profile.blogger }}" target="_blank">blogger Profile</a>
+                        </div>
+                    {% endif %}
+
+                    {% if user.user_profile.homepage %}
+                        <div class="item">
+                            <img src="{% static 'hacker-news/img/html5.png' %}">
+                            <a href="{{ user.user_profile.homepage }}" target="_blank">Homepage</a>
+                        </div>
+                    {% endif %}
+
+                    {% if user.email %}
+                        <div class="item">
+                            <img src="{% static 'hacker-news/img/gmail.png' %}">
+                            <a href="mailto:{{ user.email }}" target="_blank">Email Id</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

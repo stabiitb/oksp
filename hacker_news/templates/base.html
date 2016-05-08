@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="OKSP">
+    <meta name="author" content="Bijoy Singh Kochar, Dheerendra Rathor, Akash Trehan"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="OKSP, IITB, IIT Bombay">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="{% static 'hacker-news/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'hacker-news/css/profile.css' %}" rel="stylesheet">
+    <link href="{% static 'hacker-news/css/common.css' %}" rel="stylesheet">
+
+    <meta name="theme-color" content="#dd1338">
+    <meta name="msapplication-navbutton-color" content="#dd1338">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#dd1338">
+</head>
+
+<body class="{% block body_class %}body{% endblock %}">
+<nav class="oksp-navbar navbar navbar-default navbar-fixed-top">
+    <div class="oksp-navbar-container container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/hacker-news">
+                <img class="oksp-navbar-logo" alt="Brand" src="{% static 'img/oksp-logo.png' %}">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {% if request.user.is_authenticated %}
+                    <li><a href="{{ BASE_DIR }}/hacker-news/profile/{{ request.user.user_profile.id }}">PROFILE</a></li>
+                    <li><a href="{{ BASE_DIR }}../../admin/">ADMIN</a></li>
+                {% endif %}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    <li><a href="{{ BASE_DIR }}logout/">LOGOUT</a></li>
+                {% else %}
+                    <div id="sso-root"></div>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block main_container %}
+
+{% endblock %}
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">&copy; oksp, IIT Bombay</p>
+    </div>
+</footer>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="{% static 'hacker-news/js/bootstrap.min.js' %}"></script>
+<script src="http://gymkhana.iitb.ac.in/sso/static/widget/js/login.min.js" type="application/javascript"></script>
+<script type="application/javascript">
+        new SSO_JS({
+            config: {
+                client_id: 'nQG40LFXCX3GOmqvNSZOhdl6KFr8HWO49fAhviKs',   // Compulsory
+                scope: ['basic', 'profile', 'ldap' ]    // Optional. Default is  ['basic']
+            }
+        }).init();
+    </script>
+
+</body>
+</html>

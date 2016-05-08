@@ -1,6 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.db import models
 
 
 class UserProfile(models.Model):
@@ -45,7 +45,5 @@ class Comment(models.Model):
     text = models.TextField()
     link = models.ForeignKey(News)
 
-    def __str__(self):
-        return self.text
     def __str__(self):
         return self.text

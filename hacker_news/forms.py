@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import News, Comment
+from .models import Comment, News
 
 
 class NewsUploadForm(forms.ModelForm):
