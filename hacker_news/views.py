@@ -1,22 +1,20 @@
 from typing import Tuple
 
 from django.conf import settings
-from django.shortcuts import render, redirect, get_object_or_404, render_to_response
-from django.views.generic import ListView, View, TemplateView
-
 from django.contrib import auth
-from django.contrib.auth.models import User, Group
-from hacker_news.models import News, UserProfile, Comment
-
+from django.contrib.auth.models import Group, User
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render, render_to_response
+from django.template import RequestContext
+from django.views.generic import ListView, TemplateView, View
 from oauth.authorization import Authorization
 from oauth.exceptions import OAuthError
 from oauth.request import UserFieldAPIRequest
 
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.template import RequestContext
+from hacker_news.models import Comment, News, UserProfile
 
-from .forms import NewsUploadForm, CommentForm
+from .forms import CommentForm, NewsUploadForm
 
 
 class SSOAuthorizationView(View):
@@ -93,12 +91,11 @@ class UserProfileView(TemplateView):
 
 
 class NewsListView(ListView):
-    queryset = News.objects.order_by("-date")[:10]
     template_name = 'hacker-news/news.html'
     context_object_name = 'News'
 
     def get(self, request, *args, **kwargs):
-        queryset = News.objects.order_by('id')
+        queryset = News.objects.order_by('-post_date')
         context = locals()
         context[self.context_object_name] = queryset
         return render_to_response(self.template_name, context, context_instance=RequestContext(request))
@@ -107,16 +104,27 @@ class NewsListView(ListView):
 def news_detail(request, id=None):
     instance = get_object_or_404(News, id=id)
     form = CommentForm(request.POST or None)
-    if form.is_valid():
-        form_obj = Comment(text=request.POST.get('text'), link=instance)
-        form_obj.save()
-        return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
-    comments = instance.comment_set.all()
+    reply = CommentForm(request.POST or None)
+    if 'Comment' in request.POST:
+        if form.is_valid():
+            form_obj = Comment(text=request.POST.get('text'), link = instance, comment_link=None)
+            form_obj.save()
+            return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
+    else:
+        if reply.is_valid():
+            comment_instance = get_object_or_404(Comment, id = request.POST.get('comment_id'))
+            form_obj = Comment(text=request.POST.get('text'), link = instance, comment_link= comment_instance)
+            form_obj.save()
+            return HttpResponseRedirect(reverse('hacker-news:news_detail', kwargs={'id': id}))
+    comments = instance.comment_set.filter(comment_link=None)
+    reply_comments = instance.comment_set.filter(comment_link__isnull=False)
 
     context = {
         'news': instance,
         'comments': comments,
         'form': form,
+        'reply': reply,
+        'reply_comments': reply_comments,
     }
     return render(request, 'hacker-news/news_detail.html', context) 
 

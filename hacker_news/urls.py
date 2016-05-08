@@ -1,6 +1,7 @@
 from django.conf.urls import url
-from hacker_news.views import NewsListView, SSOAuthorizationView, UserProfileView
+
 from hacker_news import views
+from hacker_news.views import NewsListView, SSOAuthorizationView, UserProfileView
 
 urlpatterns = [
     url(r'^$', NewsListView.as_view(), name='news_list'),

@@ -21,4 +21,3 @@ ADMINS_EMAIL_LIST = [
 ]
 
 OAUTH_BASE_URL = 'https://gymkhana.iitb.ac.in/sso/'
-
