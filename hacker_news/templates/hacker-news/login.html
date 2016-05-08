@@ -1,3 +1,147 @@
-{% extends "hacker-news/header.html" %}
-{% block content %}
-{%  endblock %}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Refresh" content="3600">
+        <style>
+        html, body {
+            height: 100%;
+            min-height: 100%;
+            position: relative;
+        }
+        body {
+            word-wrap: break-word;
+        }
+        .dropdown-button {
+            background-color: transparent;
+        }
+        .center-block {
+            max-width: 500px;
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        }
+        .site-footer {
+            position: relative;
+            margin-top: 40px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #767676;
+            border-top: 1px solid #eee;
+        }
+            .masthead {
+                position: relative;
+                padding: 80px 0;
+                color: #cdbfe3;
+                text-align: center;
+                text-shadow: 0 1px 0 rgba(0,0,0,.1);
+                /* background-color: #CEC7D9; */
+                background-image: -webkit-gradient(linear,left top,left bottom,from(#BC506C),to(#6f5499));
+                background-image: -webkit-linear-gradient(top,#BC506C 0,#6f5499 100%);
+                background-image: -o-linear-gradient(top,#BC506C 0,#6f5499 100%);
+                background-image: linear-gradient(to bottom,#BC506C 0,#6f5499 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#BC506C', endColorstr='#6F5499', GradientType=0);
+                background-repeat: repeat-x;
+                }
+            .btn-outline-inverse {
+                color: #fff;
+                background-color: transparent;
+                border-color: #cdbfe3;
+            }
+            .btn-outline-inverse:active, .btn-outline-inverse:focus, .btn-outline-inverse:hover {
+                color: #563d7c;
+                text-shadow: none;
+                background-color: #fff;
+                border-color: #fff;
+            }
+            .masthead .btn {
+                width: 100%;
+                padding: 15px 30px;
+                font-size: 20px;
+            }
+            @media (min-width: 480px) {
+                .masthead .btn {
+                    width: auto;
+                }
+            }
+        </style>
+        <title>Login</title>
+      {% load staticfiles %}
+    <script src="{% static 'hacker-news/js/jquery.min.js' %}"></script>
+    <link href="{% static 'hacker-news/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'hacker-news/css/normalize.css' %}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'hacker-news/js/bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+
+         <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="">OKSP</a>
+            </div>
+            </div>
+          </nav>
+
+           <div class="container container-table">
+           <br>
+           <br>
+           <br>
+           {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+              <h3 align="center">Sign In to OKSP</h3>
+              <div class="col-md-10 col-md-offset-3">
+                 <form class="form-inline" role="form" action="{% url 'hacker-news:new_entry' %}" method="POST">
+                 {% csrf_token %}
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Password</label>
+                    <input type="password" class="form-control" id="pwd" name="password">
+                  </div>
+                     <br><br>
+                  <span style="padding-left:215px"><button type="submit" class="btn btn-default">Login</button></span>
+                </form>
+              </div>
+              <br>
+              <hr>
+              <br>
+                  <!--<form method="POST" action="/logout_users">
+                    {%csrf_token%}
+                       <div class="row">
+                        <div class="col-md-2 col-md-offset-5">
+                              <button type="submit" class="btn btn-primary">Logout</button>
+                        </div>
+                       </div>
+                   </form>-->
+               </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        <footer class="footer navbar-fixed-bottom ">
+          <div class="container-fluid">
+            <p class="text-muted panel-footer text-center" >Developed by STAB webteam.</p>
+          </div>
+        </footer>
+    </body>
+</html>
