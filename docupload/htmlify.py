@@ -5,8 +5,6 @@ HTMLify: Convert any fileformat supported by pandoc to HTML5
 import os
 
 import pypandoc
-from django.conf import settings
-
 
 def get_html(doc_file):
     '''Uses pypandoc to convert uploaded file to HTML5'''
