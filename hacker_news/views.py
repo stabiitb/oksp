@@ -147,33 +147,3 @@ def upload(request):
         "form": form,
     }
     return render(request, "hacker-news/news_upload.html", context)
-
-
-def login(request):
-    return render(request, "hacker-news/login.html")
-
-
-def new_entry(request):
-    username = request.POST.get("username")
-    passwd = request.POST.get("password")
-
-    if "" in [username, passwd]:
-        messages.warning(request, "Form not completely filled.")
-        return redirect(reverse("hacker-news:authorization"))
-
-    user_exists = User.objects.filter(username=username).exists()
-    if not user_exists:
-        messages.warning(request, "User does not exist. Sign Up first.")
-        return redirect(reverse("hacker-news:authorization"))
-    user = User.objects.get(username=username)
-    if hashlib.sha512(passwd).hexdigest() != user.member.password:
-        messages.warning(request, "Password does not match.")
-        return redirect(reverse("hacker-news:authorization"))
-    if user.member.current_status != "IN":
-        log = Log(user=user)
-        log.save()
-        user.member.current_status = "IN"
-        user.member.current_log = log
-        user.member.save()
-        user.save()
-    return redirect(reverse("hacker-news:authorization"))
