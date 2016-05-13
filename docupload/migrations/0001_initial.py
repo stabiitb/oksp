@@ -9,17 +9,19 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
-        migrations.CreateModel(
-            name='Documentation',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('doc_file', models.FilePathField(verbose_name='../static/docs/')),
-                ('pub_date', models.DateTimeField(verbose_name='date published')),
-            ],
-        ),
+        migrations.CreateModel(name='Documentation',
+                               fields=[
+                                   ('id', models.AutoField(auto_created=True,
+                                                           primary_key=True,
+                                                           serialize=False,
+                                                           verbose_name='ID')),
+                                   ('name', models.CharField(max_length=200)),
+                                   ('doc_file', models.FilePathField(
+                                       verbose_name='../static/docs/')),
+                                   ('pub_date', models.DateTimeField(
+                                       verbose_name='date published')),
+                               ], ),
     ]

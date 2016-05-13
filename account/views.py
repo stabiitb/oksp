@@ -73,14 +73,28 @@ def signup(userdata, access_token):
         if len(secondary_emails) > 0:
             secondary_email = secondary_emails[0].get('email')
 
-    auth_user = User.objects.create_user(username=username, password=password,
-                                         email=email, first_name=first_name, last_name=last_name)
+    auth_user = User.objects.create_user(username=username,
+                                         password=password,
+                                         email=email,
+                                         first_name=first_name,
+                                         last_name=last_name)
     auth_user.save()
 
-    _user = Member(user=auth_user, roll=roll_number, sex=sex, contact=contact, hostel=hostel,
-                   room=room, discipline=discipline, join_year=join_year, graduation_year=graduation_year,
-                   degree=degree, current_status=current_status, current_log=current_log,
-                   secondary_email=secondary_email, password=None, profile_picture=profile_picture,
+    _user = Member(user=auth_user,
+                   roll=roll_number,
+                   sex=sex,
+                   contact=contact,
+                   hostel=hostel,
+                   room=room,
+                   discipline=discipline,
+                   join_year=join_year,
+                   graduation_year=graduation_year,
+                   degree=degree,
+                   current_status=current_status,
+                   current_log=current_log,
+                   secondary_email=secondary_email,
+                   password=None,
+                   profile_picture=profile_picture,
                    access_token=access_token)
     _user.save()
     print(Member.objects.all())
@@ -89,12 +103,12 @@ def signup(userdata, access_token):
 
 def redirect_function(request):
     authcode = request.GET.get('code', 'error')
-    authtoken = (clientid+':'+clientsecret).encode('ascii')
+    authtoken = (clientid + ':' + clientsecret).encode('ascii')
     authtoken = base64.b64encode(authtoken)
     url = 'https://gymkhana.iitb.ac.in/sso/oauth/token/'
     header = {
         'Host': 'gymkhana.iitb.ac.in',
-        'Authorization': 'Basic '+authtoken.decode('ascii'),
+        'Authorization': 'Basic ' + authtoken.decode('ascii'),
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     }
 
@@ -102,7 +116,7 @@ def redirect_function(request):
         'code': authcode,
         'redirect_uri': redirecturl,
         'grant_type': "authorization_code"
-        }
+    }
     r = requests.post(url, data=payload, headers=header, verify=False)
 
     parsed_json = json.loads(r.content.decode('ascii'))
@@ -111,8 +125,9 @@ def redirect_function(request):
     userdata = getdata(access_token)
     check, data = check_enough_information(userdata)
     if not check:
-        messages.Warning(request, "Not enough Information provided. "
-                                  "Please allow application to access the required information.")
+        messages.Warning(
+            request, "Not enough Information provided. "
+            "Please allow application to access the required information.")
         return redirect(reverse("hacker-news:news_list"))
 
     username = userdata.get('username')
@@ -156,11 +171,11 @@ def check_enough_information(userdata):
 def getdata(account_token):
     fields = 'first_name,last_name,type,profile_picture,sex,username,email,program,contacts,insti_address,' \
              'secondary_emails,mobile,roll_number'
-    url = 'https://gymkhana.iitb.ac.in/sso/user/api/user/?fields='+fields
+    url = 'https://gymkhana.iitb.ac.in/sso/user/api/user/?fields=' + fields
     header = {
         'GET /sso/user/api/user/ HTTP/1.1'
         'Host': 'gymkhana.iitb.ac.in',
-        'Authorization': 'Bearer '+account_token
+        'Authorization': 'Bearer ' + account_token
     }
     r = requests.get(url, headers=header, verify=False)
     parsed_json = json.loads(r.content.decode('ascii'))

@@ -12,9 +12,7 @@ clientid = 'bOSzOhiKUxDAcWTecSSGVN0m1weI7f4RuiKUP4Hw'
 clientsecret = 'Y5ASwZPx29bEWZ5AyjCY51br63mqXv6rUSCWdzKRRSFGAQEjrcEX9PGPWwd5hCGRw7grUCg3rL2EgLSvg17Ay8gArxMrZCxTGaQsm4JBFSjnBWG8bY9eOrTk90Tk2b0a'
 password = "87asyadg36b26ccncy287292mu7gdsasdjiiecm"
 
-INSTALLED_APPS += [
-    'debug_toolbar',
-]
+INSTALLED_APPS += ['debug_toolbar', ]
 
 DATABASES = {
     'default': {

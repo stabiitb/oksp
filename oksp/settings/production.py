@@ -43,7 +43,8 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s [%(asctime)s] [%(name)s] [%(module)s] [Process:%(process)d] '
+            'format':
+            '%(levelname)s [%(asctime)s] [%(name)s] [%(module)s] [Process:%(process)d] '
                       '[Thread:%(thread)d] %(message)s'
         },
         'simple': {
@@ -99,7 +100,6 @@ LOGGING = {
             'propagate': False,
         },
     },
-
 }
 logging.config.dictConfig(LOGGING)
 

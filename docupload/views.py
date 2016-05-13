@@ -19,22 +19,23 @@ def index(request):
     template = loader.get_template('docupload/index.html')
     form = DocUploadForm()
 
-    context = {
-        'doc_list': doc_list,
-        'form': form,
-    }
-    return render(request,"docupload/index.html", context)
+    context = {'doc_list': doc_list, 'form': form, }
+    return render(request, "docupload/index.html", context)
+
 
 def editor_choice(request):
     return render(request, "docupload/editor_choice.html")
 
+
 def markdown_editor(request):
     return render(request, "docupload/markdown.html")
+
 
 def wsyiwyg_editor(request):
     return render(request, "docupload/wsyiwyg.html")
 
-def upload(request): 
+
+def upload(request):
     '''View for /doc/upload/'''
 
     html = HTMLifier(doc_base_path=DOC_DIR)

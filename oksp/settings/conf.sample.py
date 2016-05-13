@@ -19,7 +19,7 @@ DB_PORT = '5432'
 CLIENT_ID = 'CLIENT_ID'
 
 ADMINS_EMAIL_LIST = [
-     # ('Name', 'email@example.com'),
+    # ('Name', 'email@example.com'),
 ]
 
 OAUTH_BASE_URL = 'https://gymkhana.iitb.ac.in/sso/'

@@ -31,13 +31,17 @@ class News(models.Model):
     """
 
     title = models.CharField(max_length=300)
-    post_date = models.DateTimeField(auto_now = False, auto_now_add = True)
+    post_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     description = models.TextField()
     link = models.URLField(max_length=200)
     upvotes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural = "News"
+        verbose_name = "News"
 
 
 class Comment(models.Model):

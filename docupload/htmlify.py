@@ -26,7 +26,6 @@ class HTMLifier():
     HTMLifier: Class which handles conversion of any docx/md/tex file to HTML
     '''
 
-
     def __init__(self, doc_base_path='.'):
         self.doc_base_path = doc_base_path
 

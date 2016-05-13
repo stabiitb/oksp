@@ -8,7 +8,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_display_links = ['title']
     search_fields = ['title']
     context_object_name = 'News'
-    
+
     class Meta:
         model = News
 

@@ -9,8 +9,9 @@ class DocumentationAdmin(admin.ModelAdmin):
     list_display_links = ["name"]
     list_filter = ["pub_date"]
     search_fields = ["name"]
+
     class Meta:
         model = Documentation
-    
-        
+
+
 admin.site.register(Documentation, DocumentationAdmin)

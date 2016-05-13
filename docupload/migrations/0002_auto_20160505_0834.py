@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('docupload', '0001_initial'),
-    ]
+    dependencies = [('docupload', '0001_initial'), ]
 
     operations = [
         migrations.AlterField(
             model_name='documentation',
             name='doc_file',
-            field=models.FileField(upload_to='/home/darknight/Desktop/oksp/media/'),
-        ),
+            field=models.FileField(
+                upload_to='/home/darknight/Desktop/oksp/media/'), ),
     ]
