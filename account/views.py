@@ -11,13 +11,13 @@ import json
 
 
 def login(request):
-    return HttpResponseRedirect(sso_url("signin"))
+    return HttpResponseRedirect(sso_url())
 
 
-def sso_url(state):
+def sso_url():
     return 'https://gymkhana.iitb.ac.in/sso/oauth/authorize/?client_id='+clientid+'&response_type=' \
             'code&scope=basic%20profile%20ldap%20sex%20picture%20phone%20insti_address%20program%20secondary_emails' \
-            '&redirect_uri='+redirecturl+'&state='+state
+            '&redirect_uri='+redirecturl+'&state=signin'
 
 
 def logout(request):
@@ -89,11 +89,8 @@ def signup(userdata, access_token):
 
 def redirect_function(request):
     authcode = request.GET.get('code', 'error')
-    state = request.GET.get('state')
     authtoken = (clientid+':'+clientsecret).encode('ascii')
     authtoken = base64.b64encode(authtoken)
-
-    # state shows whether the user is entering and exiting
     url = 'https://gymkhana.iitb.ac.in/sso/oauth/token/'
     header = {
         'Host': 'gymkhana.iitb.ac.in',
@@ -126,9 +123,6 @@ def redirect_function(request):
         current_user.access_token = access_token
         current_user.save(update_fields=["access_token"])
         auth.login(request, user)
-        if state == "forgotpassword":
-            request.user.member.password = None
-            request.user.member.save()
         return HttpResponseRedirect(reverse('hacker-news:news_list'))
     else:
         signup(userdata, access_token)
