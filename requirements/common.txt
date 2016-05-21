@@ -1,3 +1,4 @@
 Django==1.9.4
 psycopg2==2.6.1
 pypandoc
+Beautiful Soup==4.4.1
