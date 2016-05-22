@@ -14,5 +14,5 @@ class Documentation(models.Model):
     doc_file = models.FileField(upload_to = '%s/media/' %settings.BASE_DIR)
     pub_date = models.DateTimeField('date published')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

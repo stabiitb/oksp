@@ -1,22 +1,41 @@
 '''
 HTMLify: Convert any fileformat supported by pandoc to HTML5
 '''
-
+import glob
 import os
 
 import pypandoc
-
+from bs4 import BeautifulSoup
 
 def get_html(doc_file):
     '''Uses pypandoc to convert uploaded file to HTML5'''
 
     tmp_loc = '/tmp/uploaded_' + str(doc_file)
-
+    
     with open(tmp_loc, 'wb') as tmp_file:
         for chunk in doc_file.chunks():
             tmp_file.write(chunk)
-    html = pypandoc.convert(tmp_loc, 'html5')
+    html = pypandoc.convert( 
+        tmp_loc,
+        'html5',
+        extra_args=['--extract-media=']
+        )
+    img_counter = 1
+    soup = BeautifulSoup(html, 'lxml')
+    for img in soup.findAll('img'):
+        extention = img['src'].split(".")[-1]
+        img_name = '/media/' + str(doc_file) + '_' +str(img_counter) + "." + extention
+        img['src'] = img_name
+        img_counter += 1
+    img_counter -= 1
+    for img_original in glob.glob('media/image*'):
+        extention = img_original.split(".")[-1]
+        img_name = 'media/' + str(doc_file) + '_' +str(img_counter) + "." + extention
+        os.rename(img_original, img_name)
+        img_counter -= 1
+    html = str(soup)
     os.remove(tmp_loc)
+
 
     return html
 
