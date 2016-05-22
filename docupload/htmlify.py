@@ -7,7 +7,6 @@ import os
 import pypandoc
 from bs4 import BeautifulSoup
 
-
 def get_html(doc_file):
     '''Uses pypandoc to convert uploaded file to HTML5'''
 
@@ -24,12 +23,14 @@ def get_html(doc_file):
     img_counter = 1
     soup = BeautifulSoup(html, 'lxml')
     for img in soup.findAll('img'):
-        img_name = '/media/' + str(doc_file) + '_' +str(img_counter) + '.jpg'
+        extention = img['src'].split(".")[-1]
+        img_name = '/media/' + str(doc_file) + '_' +str(img_counter) + "." + extention
         img['src'] = img_name
         img_counter += 1
     img_counter -= 1
     for img_original in glob.glob('media/image*'):
-        img_name = 'media/' + str(doc_file) + '_' +str(img_counter) + '.jpg'
+        extention = img_original.split(".")[-1]
+        img_name = 'media/' + str(doc_file) + '_' +str(img_counter) + "." + extention
         os.rename(img_original, img_name)
         img_counter -= 1
     html = str(soup)
