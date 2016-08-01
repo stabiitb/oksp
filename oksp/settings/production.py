@@ -45,7 +45,7 @@ LOGGING = {
         'verbose': {
             'format':
             '%(levelname)s [%(asctime)s] [%(name)s] [%(module)s] [Process:%(process)d] '
-                      '[Thread:%(thread)d] %(message)s'
+            '[Thread:%(thread)d] %(message)s'
         },
         'simple': {
             'format': '%(levelname)s %(message)s'

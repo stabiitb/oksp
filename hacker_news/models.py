@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
-
+from account.models import Member
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='user_profile')
@@ -30,11 +30,11 @@ class News(models.Model):
     News: Model class which holds all the shared links
     """
 
-    title = models.CharField(max_length=300)
-    post_date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    title = models.CharField(max_length=300, null=False)
     description = models.TextField()
-    link = models.URLField(max_length=200)
-    upvotes = models.IntegerField(default=0)
+    link = models.URLField(max_length=200, unique=True, null=False)
+    votes = models.IntegerField(default=0)
+    post_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
@@ -51,3 +51,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Vote(models.Model):
+    VOTE = ((1, 1), (-1, -1), (0, 0))
+    user = models.OneToOneField(Member, on_delete=models.CASCADE)
+    amount = models.IntegerField(choices=VOTE, default=0)

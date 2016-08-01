@@ -10,13 +10,13 @@
                         <p class="pull-right">{{ news.upvotes }}</p>
                         <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
                             <div style="margin-bottom: 0.2em;">
-                                <a href='{% url "hacker-news:update" news.id %}'>
+                                <a href='{% url "hacker-news:upvote" news.id %}'>
                                     <img src="{% static 'hacker-news/img/upvote.png' %}"/>
                                 </a>
                             </div>
 
                             <div style="margin-top: 0.2em;">
-                                <a href='{% url "hacker-news:update" news.id %}'>
+                                <a href='{% url "hacker-news:downvote" news.id %}'>
                                     <img src="{% static 'hacker-news/img/downvote.png' %}"/>
                                 </a>
                             </div>

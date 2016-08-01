@@ -9,7 +9,7 @@ class Log(models.Model):
 
 
 class Member(models.Model):
-    SEX = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'), )
+    SEX = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'))
     HOSTELS = (('Hostel 1', 'Hostel 1'), ('Hostel 2', 'Hostel 2'),
                ('Hostel 3', 'Hostel 3'), ('Hostel 4', 'Hostel 4'),
                ('Hostel 5', 'Hostel 5'), ('Hostel 6', 'Hostel 6'),
@@ -111,7 +111,6 @@ class Member(models.Model):
                  ('2021', '2021'), )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     roll = models.CharField(max_length=9, blank=True, null=True)
-    STATUS = (('IN', 'IN'), ('OUT', 'OUT'))
     DEGREE = (
         ('Bachelor of Technology', 'Bachelor of Technology'),
         ('Master of Technology', 'Master of Technology'),
@@ -162,9 +161,6 @@ class Member(models.Model):
     degree = models.CharField(
         max_length=50, blank=True,
         null=True, choices=DEGREE)
-    current_status = models.CharField(
-        max_length=5, blank=True,
-        null=True, choices=STATUS)
     current_log = models.ForeignKey(
         Log, on_delete=models.SET_NULL,
         blank=True, null=True)

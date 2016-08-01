@@ -75,15 +75,15 @@ class Migration(migrations.Migration):
                     blank=True,
                     choices=[
                         ('Aerospace Engineering', 'Aerospace Engineering'),
-                        ('Animation', 'Animation'),
-                        ('Application Software Centre',
-                         'Application Software Centre'),
-                        ('Applied Geophysics', 'Applied Geophysics'),
-                        ('Applied Statistics and Informatics',
-                         'Applied Statistics and Informatics'),
-                        ('Biomedical Engineering', 'Biomedical Engineering'),
-                        ('Biosciences and Bioengineering',
-                         'Biosciences and Bioengineering'),
+                        ('Animation', 'Animation'), (
+                            'Application Software Centre',
+                            'Application Software Centre'),
+                        ('Applied Geophysics', 'Applied Geophysics'), (
+                            'Applied Statistics and Informatics',
+                            'Applied Statistics and Informatics'),
+                        ('Biomedical Engineering', 'Biomedical Engineering'), (
+                            'Biosciences and Bioengineering',
+                            'Biosciences and Bioengineering'),
                         ('Biotechnology', 'Biotechnology'),
                         ('Centre for Aerospace Systems Design and Engineering',
                          'Centre for Aerospace Systems Design and Engineering'
@@ -101,16 +101,16 @@ class Migration(migrations.Migration):
                         ('Centre for Technology Alternatives for Rural Areas',
                          'Centre for Technology Alternatives for Rural Areas'),
                         ('Centre for Urban Science and Engineering',
-                         'Centre for Urban Science and Engineering'),
-                        ('Centre of Studies in Resources Engineering',
-                         'Centre of Studies in Resources Engineering'), (
-                             'Chemical Engineering', 'Chemical Engineering'),
-                        ('Chemistry', 'Chemistry'), (
-                            'Civil Engineering', 'Civil Engineering'), (
-                                'Climate Studies', 'Climate Studies'), (
-                                    'Computer Centre', 'Computer Centre'), (
-                                        'Computer Science & Engineering',
-                                        'Computer Science & Engineering'),
+                         'Centre for Urban Science and Engineering'), (
+                             'Centre of Studies in Resources Engineering',
+                             'Centre of Studies in Resources Engineering'),
+                        ('Chemical Engineering',
+                         'Chemical Engineering'), ('Chemistry', 'Chemistry'), (
+                             'Civil Engineering', 'Civil Engineering'), (
+                                 'Climate Studies', 'Climate Studies'), (
+                                     'Computer Centre', 'Computer Centre'), (
+                                         'Computer Science & Engineering',
+                                         'Computer Science & Engineering'),
                         ('Continuing Education Programme',
                          'Continuing Education Programme'), (
                              'Corrosion Science and Engineering',
@@ -149,10 +149,11 @@ class Migration(migrations.Migration):
                          'National Centre for Aerospace Innovation and Research'
                          ), ('National Centre for Mathematics',
                              'National Centre for Mathematics'), (
-                                 'Physical Education', 'Physical Education'),
-                        ('Physics', 'Physics'), ('Physics, Material Science',
-                                                 'Physics, Material Science'),
-                        ('Preparatory Course', 'Preparatory Course'),
+                                 'Physical Education',
+                                 'Physical Education'), ('Physics', 'Physics'),
+                        ('Physics, Material Science',
+                         'Physics, Material Science'), ('Preparatory Course',
+                                                        'Preparatory Course'),
                         ('Reliability Engineering', 'Reliability Engineering'),
                         ('Shailesh J. Mehta School of Management',
                          'Shailesh J. Mehta School of Management'), (
@@ -168,16 +169,14 @@ class Migration(migrations.Migration):
                     ],
                     max_length=100,
                     null=True)),
-                ('join_year', models.CharField(blank=True,
-                                               choices=[('2010', '2010'),
-                                                        ('2011', '2011'),
-                                                        ('2012', '2012'),
-                                                        ('2013', '2013'),
-                                                        ('2014', '2014'),
-                                                        ('2015', '2015'),
-                                                        ('2016', '2016')],
-                                               max_length=4,
-                                               null=True)),
+                ('join_year',
+                 models.CharField(blank=True,
+                                  choices=[('2010', '2010'), ('2011', '2011'),
+                                           ('2012', '2012'), ('2013', '2013'),
+                                           ('2014', '2014'), ('2015', '2015'),
+                                           ('2016', '2016')],
+                                  max_length=4,
+                                  null=True)),
                 ('graduation_year',
                  models.CharField(blank=True,
                                   choices=[('2015', '2015'), ('2016', '2016'),
@@ -199,23 +198,25 @@ class Migration(migrations.Migration):
                              ('Master of Design', 'Master of Design'),
                              ('Master of Philosophy', 'Master of Philosophy'),
                              ('Master of Management', 'Master of Management'),
-                             ('M.S. (Exit Degree)', 'M.S. (Exit Degree)'),
-                             ('Master of Technology (Exit Degree)',
-                              'Master of Technology (Exit Degree)'),
-                             ('M.Tech. + Ph.D. Dual Degree',
-                              'M.Tech. + Ph.D. Dual Degree'),
+                             ('M.S. (Exit Degree)', 'M.S. (Exit Degree)'), (
+                                 'Master of Technology (Exit Degree)',
+                                 'Master of Technology (Exit Degree)'), (
+                                     'M.Tech. + Ph.D. Dual Degree',
+                                     'M.Tech. + Ph.D. Dual Degree'),
                              ('Preparatory Course', 'Preparatory Course'),
-                             ('Visiting Student', 'Visiting Student'),
-                             ('Master of Philosophy (Exit Degree)',
-                              'Master of Philosophy (Exit Degree)'),
-                             ('Master of Science (Exit Degree)',
-                              'Master of Science (Exit Degree)'),
-                             ('M.Sc. + Ph.D. Dual Degree',
-                              'M.Sc. + Ph.D. Dual Degree'),
-                             ('M.Phil. + Ph.D. Dual Degree',
-                              'M.Phil. + Ph.D. Dual Degree'), (
-                                  'Executive MBA', 'Executive MBA'), (
-                                      'Four Year BS', 'Four Year BS'),
+                             ('Visiting Student', 'Visiting Student'), (
+                                 'Master of Philosophy (Exit Degree)',
+                                 'Master of Philosophy (Exit Degree)'), (
+                                     'Master of Science (Exit Degree)',
+                                     'Master of Science (Exit Degree)'), (
+                                         'M.Sc. + Ph.D. Dual Degree',
+                                         'M.Sc. + Ph.D. Dual Degree'), (
+                                             'M.Phil. + Ph.D. Dual Degree',
+                                             'M.Phil. + Ph.D. Dual Degree'), (
+                                                 'Executive MBA',
+                                                 'Executive MBA'), (
+                                                     'Four Year BS',
+                                                     'Four Year BS'),
                              ('Integrated M.Tech.', 'Integrated M.Tech.'), (
                                  'Master of Science By Research',
                                  'Master of Science By Research'), (

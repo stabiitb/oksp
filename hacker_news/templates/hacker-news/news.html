@@ -1,7 +1,7 @@
 {% extends "hacker-news/header.html" %}
 {% load staticfiles %}
 {% block content %}
-    {% for obj in Newss %}
+    {% for obj in news %}
         <div class="col-sm-12">
             <div class="thumbnail">
                 <div class="caption">
@@ -11,13 +11,13 @@
                             <p class="pull-right">{{ obj.upvotes }}</p>
                             <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
                                 <div style="margin-bottom: 0.2em;">
-                                    <a href='{% url "hacker-news:update" obj.id %}'>
+                                    <a href='{% url "hacker-news:upvote" obj.id %}'>
                                         <img src="{% static 'hacker-news/img/upvote.png' %}"/>
                                     </a>
                                 </div>
 
                                 <div style="margin-top: 0.2em;">
-                                    <a href='{% url "hacker-news:update" obj.id %}'>
+                                    <a href='{% url "hacker-news:downvote" obj.id %}'>
                                         <img src="{% static 'hacker-news/img/downvote.png' %}"/>
                                     </a>
                                 </div>

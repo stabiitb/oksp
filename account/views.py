@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from account.models import *
+from hacker_news.models import Vote
 from oksp.settings.local import *
 import base64
 import requests
@@ -59,7 +60,6 @@ def signup(userdata, access_token):
         join_year = program.get('join_year')
         graduation_year = program.get('graduation_year')
         degree = program.get('degree_name')
-    current_status = None
     address = userdata.get('insti_address')
     hostel = None
     room = None
@@ -90,14 +90,16 @@ def signup(userdata, access_token):
                    join_year=join_year,
                    graduation_year=graduation_year,
                    degree=degree,
-                   current_status=current_status,
                    current_log=current_log,
                    secondary_email=secondary_email,
                    password=None,
                    profile_picture=profile_picture,
                    access_token=access_token)
     _user.save()
-    print(Member.objects.all())
+
+    _vote = Vote(user=_user)
+
+    _vote.save()
     return
 
 
@@ -131,12 +133,13 @@ def redirect_function(request):
         return redirect(reverse("hacker-news:news_list"))
 
     username = userdata.get('username')
+    user = User.objects.filter(username=username)
 
-    if User.objects.filter(username=username).exists():
-        user = auth.authenticate(username=username, password=password)
+    if Member.objects.filter(user=user).exists():
         current_user = Member.objects.get(user=user)
         current_user.access_token = access_token
         current_user.save(update_fields=["access_token"])
+        user = auth.authenticate(username=username, password=password)
         auth.login(request, user)
         return HttpResponseRedirect(reverse('hacker-news:news_list'))
     else:

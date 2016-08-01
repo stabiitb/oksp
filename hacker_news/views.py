@@ -1,6 +1,5 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, render_to_response
-from django.template import RequestContext
 from django.views.generic import ListView, TemplateView
 
 from hacker_news.models import *
@@ -28,15 +27,14 @@ class UserProfileView(TemplateView):
 
 class NewsListView(ListView):
     template_name = 'hacker-news/news.html'
-    context_object_name = 'News'
 
     def get(self, request, *args, **kwargs):
         queryset = News.objects.order_by('-post_date')
         context = locals()
         context[self.context_object_name] = queryset
-        return render_to_response(self.template_name,
-                                  context,
-                                  context_instance=RequestContext(request))
+        return render_to_response(self.template_name, {
+            'news': News.objects.all()
+        })
 
 
 def news_edit(request, id=None):
@@ -92,10 +90,43 @@ def news_detail(request, id=None):
     return render(request, 'hacker-news/news_detail.html', context)
 
 
-def vote_update(request, id=None):
+def upvote(request, id=None):
     instance = get_object_or_404(News, id=id)
-    instance.upvotes += 1
+    user = request.user
+    member = Member.objects.get(user=user)
+    vote = Vote.objects.get(user=member)
+    votes = vote.amount
+    if votes == 1:
+        instance.votes -= 1
+        vote.amount = 0
+    elif votes == 0:
+        instance.votes += 1
+        vote.amount = 1
+    else:
+        instance.votes += 2
+        vote.amount = 1
     instance.save()
+    vote.save()
+    return HttpResponseRedirect(reverse('hacker-news:news_list'))
+
+
+def downvote(request, id=None):
+    instance = get_object_or_404(News, id=id)
+    user = request.user
+    member = Member.objects.get(user=user)
+    vote = Vote.objects.get(user=member)
+    votes = vote.amount
+    if votes == 1:
+        instance.votes -= 2
+        vote.amount = -1
+    elif votes == 0:
+        instance.votes -= 1
+        vote.amount = -1
+    else:
+        instance.votes += 1
+        vote.amount = 0
+    instance.save()
+    vote.save()
     return HttpResponseRedirect(reverse('hacker-news:news_list'))
 
 

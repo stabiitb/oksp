@@ -17,9 +17,9 @@ class NewsUploadForm(forms.ModelForm):
             'description':
             forms.Textarea(attrs={'placeholder': 'Enter Description',
                                   'class': 'form-control'}),
-            'link': forms.URLInput(
-                attrs={'placeholder': 'For eg: https://www.google.co.in',
-                       'class': 'form-control'}),
+            'link': forms.URLInput(attrs={'placeholder':
+                                          'For eg: https://www.google.co.in',
+                                          'class': 'form-control'}),
         }
 
 
