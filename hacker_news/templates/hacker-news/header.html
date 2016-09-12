@@ -6,17 +6,29 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'hacker-news/css/bootstrap.min.css' %}" type = "text/css"/>
     <link rel="stylesheet" href="{% static 'hacker-news/css/header.css' %}" type = "text/css"/>
+    <link rel="stylesheet" href="{% static 'hacker-news/css/news.css' %}" type = "text/css"/>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
     <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-    <div class="page-header" style="text-align: center;">
-        <h1>IIT Bombay Hacker News</h1>
-    </div>
+
 </head>
 
 <body class="body" style="background:{%  static 'hacker-news/img/background.jpg' %}">
-    <button onclick="location.href='/account/login/'">Login/SignUp</button>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/" style="color: white;">Online Knowledge Sharing Platform</a>
+        </div>
+    </nav>
+
+    <div class="page-header" style="text-align: center;">
+        <h1>IIT Bombay Hacker News</h1>
+    </div>
+
     <div class="container-fluid" style="min-height:95%; ">
     {% block content %}
-
     {% endblock content %}
     </div>
 </body>

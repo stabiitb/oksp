@@ -2,32 +2,27 @@
 {% load staticfiles %}
 {% block content %}
     {% for obj in news %}
-        <div class="col-sm-12">
-            <div class="thumbnail">
-                <div class="caption">
-                    <div class="container">
-                        <h3>
-                            <a href="{{ obj.link }}">{{ obj.title }}</a>
-                            <p class="pull-right">{{ obj.upvotes }}</p>
-                            <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
-                                <div style="margin-bottom: 0.2em;">
-                                    <a href='{% url "hacker-news:upvote" obj.id %}'>
-                                        <img src="{% static 'hacker-news/img/upvote.png' %}"/>
-                                    </a>
-                                </div>
+        <div class="col-sm-4">
+            <h3>
+                <a href="{{ obj.link }}" class="news-title">{{ obj.title }}</a>
+                <p class="pull-right" id="votes">{{ obj.votes }}</p>
+                <div class="pull-right" style="display: inline-block; padding-right: 0.5em;" id="vote-buttons">
+                    <div style="margin-bottom: 0.2em;">
+                        <a href='{% url "hacker-news:upvote" obj.id %}'>
+                            <img src="{% static 'hacker-news/img/upvote.png' %}"/>
+                        </a>
+                    </div>
 
-                                <div style="margin-top: 0.2em;">
-                                    <a href='{% url "hacker-news:downvote" obj.id %}'>
-                                        <img src="{% static 'hacker-news/img/downvote.png' %}"/>
-                                    </a>
-                                </div>
-                            </div>
-                        </h3> 
-                        <hr/>
-                        <a class="btn btn-info btn-lg" href="{% url 'hacker-news:news_detail' obj.id %}" role="button">More &raquo;</a>
+                    <div style="margin-top: 0.2em;">
+                        <a href='{% url "hacker-news:downvote" obj.id %}'>
+                            <img src="{% static 'hacker-news/img/downvote.png' %}"/>
+                        </a>
                     </div>
                 </div>
-            </div>
+            </h3> 
+            <p class="description">{{ obj.description }}<p/>
+            <a class="btn btn-info" href="{% url 'hacker-news:news_detail' obj.id %}" role="button"> Discuss</a>
+            <hr/>
         </div>
     {% endfor %}
 {%  endblock content %}
