@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="{% static 'hacker-news/css/bootstrap.min.css' %}" type = "text/css"/>
     <link rel="stylesheet" href="{% static 'hacker-news/css/header.css' %}" type = "text/css"/>
     <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-
     <div class="page-header" style="text-align: center;">
         <h1>IIT Bombay Hacker News</h1>
     </div>
 </head>
 
 <body class="body" style="background:{%  static 'hacker-news/img/background.jpg' %}">
+    <button onclick="location.href='/account/login/'">Login/SignUp</button>
     <div class="container-fluid" style="min-height:95%; ">
     {% block content %}
+
     {% endblock content %}
     </div>
 </body>
