@@ -8,6 +8,9 @@
                     <div class="container">
                         <h3>
                             <a href="{{ obj.link }}">{{ obj.title }}</a>
+                            {% for tag in obj.tags %}
+                             <p>  {{ tag.value }}</p>
+                                {% endfor %}
                             <p class="pull-right">{{ obj.upvotes }}</p>
                             <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
                                 <div style="margin-bottom: 0.2em;">

@@ -32,6 +32,9 @@ class NewsListView(ListView):
         queryset = News.objects.order_by('-post_date')
         context = locals()
         context[self.context_object_name] = queryset
+        tags = []
+        for i in News.objects.all():
+
         return render_to_response(self.template_name, {
             'news': News.objects.all()
         })
