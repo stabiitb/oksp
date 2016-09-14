@@ -19,5 +19,7 @@ h1 {
 }
 
 hr {
-    border-color: #696969;
+    border-color: #C0C0C0;
+    margin-bottom: 0;
+    margin-top: 0;
 }
