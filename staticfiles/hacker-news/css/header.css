@@ -3,7 +3,23 @@ html, body {
 }
 
 h1 {
-    color: #0077ff;
-    font-family:"Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    font-style:italic;
+    color: #5F5764;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navbar-default {
+    background-color: #1B0732;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-brand {
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+hr {
+    border-color: #C0C0C0;
+    margin-bottom: 0;
+    margin-top: 0;
 }
