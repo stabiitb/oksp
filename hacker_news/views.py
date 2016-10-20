@@ -33,11 +33,10 @@ class NewsListView(ListView):
         context = locals()
         context[self.context_object_name] = queryset
         tags = []
-        for i in News.objects.all():
-
-        return render_to_response(self.template_name, {
-            'news': News.objects.all()
-        })
+        # TODO send upvotes and tags
+        # if(!request.user.is_anonymous())
+        #     for i in News.objects.all():
+        return render_to_response(self.template_name, {'news': News.objects.all()})
 
 
 def news_edit(request, id=None):
@@ -94,6 +93,8 @@ def news_detail(request, id=None):
 
 
 def upvote(request, id=None):
+    if(request.user.is_anonymous()):
+        return HttpResponseRedirect(reverse('account:login'))
     instance = get_object_or_404(News, id=id)
     user = request.user
     member = Member.objects.get(user=user)
@@ -114,6 +115,8 @@ def upvote(request, id=None):
 
 
 def downvote(request, id=None):
+    if(request.user.is_anonymous()):
+        return HttpResponseRedirect(reverse('account:login'))
     instance = get_object_or_404(News, id=id)
     user = request.user
     member = Member.objects.get(user=user)

@@ -1,7 +1,8 @@
 {% extends "hacker-news/header.html" %}
 {% load staticfiles %}
 {% block content %}
-    <div class="top-links"> 
+<div>
+    <div class="top-links">
         <h2 class="news-categories">POPULAR LINKS</h2>
         <hr/>
     </div>
@@ -13,29 +14,51 @@
                         <h3>
                             <a href="{{ obj.link }}">{{ obj.title }}</a>
                             {% for tag in obj.tags %}
-                             <p>  {{ tag.value }}</p>
+                             <p>  {{ tag.value }} </p>
                                 {% endfor %}
-                            <p class="pull-right">{{ obj.upvotes }}</p>
-                            <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
-                                <div style="margin-bottom: 0.2em;">
-                                    <a href='{% url "hacker-news:upvote" obj.id %}'>
-                                        <img src="{% static 'hacker-news/img/upvote.png' %}"/>
-                                    </a>
-                                </div>
+                            <p class="pull-right">{{ obj.votes }} </p>
+                            {% if request.user.is_anonymous %}
+                    <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
+                        <div style="margin-bottom: 0.2em;">
+                            <a href='{% url "hacker-news:upvote" obj.id %}'>
+                                <img src="{% static 'hacker-news/img/upvote.png' %}"/>
+                            </a>
+                        </div>
 
                         <div style="margin-top: 0.2em;">
                             <a href='{% url "hacker-news:downvote" obj.id %}'>
-                                <i class="fa fa-caret-down vote-change" style="font-size: smaller;"></i>
+                                <img src="{% static 'hacker-news/img/downvote.png' %}"/>
                             </a>
                         </div>
                     </div>
-                </h3> 
-                <p class="description">{{ obj.description }}<p/>
-                <a class="btn btn-info" href="{% url 'hacker-news:news_detail' obj.id %}" role="button"> Discuss</a>
+                    {% else %}
+                    <!-- TODO: If user has downvoted make the image downvote-blue.png appear in place of downvote.png-->
+                    <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
+                        <div style="margin-bottom: 0.2em;">
+                            <a href='{% url "hacker-news:upvote" obj.id %}'>
+                                <img src="{% static 'hacker-news/img/upvote.png' %}"/>
+                            </a>
+                        </div>
+
+                        <div style="margin-top: 0.2em;">
+                            <a href='{% url "hacker-news:downvote" obj.id %}'>
+                                <img src="{% static 'hacker-news/img/downvote.png' %}"/>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                        </h3>
+                        <p class="description">{{ obj.description }}</p>
+                        <a class="btn btn-info" href="{% url 'hacker-news:news_detail' obj.id %}" role="button"> Discuss</a>
+                    </div>
+                </div>
             </div>
         </div>
     {% endfor %}
-    <div class="latest-links top-links"> 
+</div>
+
+<div>
+    <div class="latest-links top-links">
         <h2 class="news-categories">RECENT LINKS</h2>
         <hr/>
     </div>
@@ -44,24 +67,41 @@
             <div class="col-sm-4">
                 <h3>
                     <a href="{{ obj.link }}" class="news-title">{{ obj.title }}</a>
-                    <b class="pull-right" id="votes">{{ obj.votes }}</b>
-                    <div class="pull-right" style="display: inline-block; padding-right: 0.5em;" id="vote-buttons">
+                    <p class="pull-right">{{ obj.votes }} </p>
+                    {% if request.user.is_anonymous %}
+                    <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
                         <div style="margin-bottom: 0.2em;">
                             <a href='{% url "hacker-news:upvote" obj.id %}'>
-                                <i class="fa fa-caret-up vote-change" style="font-size: smaller;"></i>
+                                <img src="{% static 'hacker-news/img/upvote.png' %}"/>
                             </a>
                         </div>
 
                         <div style="margin-top: 0.2em;">
                             <a href='{% url "hacker-news:downvote" obj.id %}'>
-                                <i class="fa fa-caret-down vote-change" style="font-size: smaller;"></i>
+                                <img src="{% static 'hacker-news/img/downvote.png' %}"/>
                             </a>
                         </div>
                     </div>
-                </h3> 
-                <p class="description">{{ obj.description }}<p/>
+                    {% else %}
+                    <div class="pull-right" style="display: inline-block; padding-right: 0.5em;">
+                        <div style="margin-bottom: 0.2em;">
+                            <a href='{% url "hacker-news:upvote" obj.id %}'>
+                                <img src="{% static 'hacker-news/img/upvote.png' %}"/>
+                            </a>
+                        </div>
+
+                        <div style="margin-top: 0.2em;">
+                            <a href='{% url "hacker-news:downvote" obj.id %}'>
+                                <img src="{% static 'hacker-news/img/downvote.png' %}"/>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </h3>
+                <p class="description">{{ obj.description }}</p>
                 <a class="btn btn-info" href="{% url 'hacker-news:news_detail' obj.id %}" role="button">Discuss</a>
             </div>
         </div>
     {% endfor %}
+</div>
 {%  endblock content %}
