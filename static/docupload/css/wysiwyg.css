@@ -1,0 +1,14 @@
+.wysiwyg-content {
+    background: white;
+    padding-bottom: 5px; 
+    padding-top: 5px; 
+}
+
+.wysiwyg-header {
+    color: black;
+    text-align: center; 
+}
+
+.wysiwyg-button {
+    margin-top: 0.5em;
+}

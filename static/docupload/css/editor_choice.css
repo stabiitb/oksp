@@ -1,0 +1,20 @@
+.editor-choice-button1 {
+    margin-right: 2em;
+}
+
+.editor-choice-button2 {
+    margin-left: 2em;
+}
+
+.editor-choice-container {
+    text-align: center;
+    margin-top:40px; 
+}
+
+.editor-choice-header {
+    font-size:40px;
+}
+
+.editor-description {
+    font-size:20px;
+}

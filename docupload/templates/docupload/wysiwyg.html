@@ -1,39 +1,29 @@
 {% extends "docupload/base.html" %}
 
-{% block style %} 
-    body {
-        background: black;
-    }
-{% endblock style %}
 
 {% block jslink %}
     <script src="//cdn.ckeditor.com/4.5.8/standard/ckeditor.js"></script>   
 {% endblock jslink %}
 
 
-{% block bar %}
-    <div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin: 0; padding: 0">
-        <a class="navbar-brand" rel="home" href='#' title="OKSP">OKSP</a>
-    </div>
-{% endblock bar %}
-
 {% block content %} 
-    <div class="jumbotron" style="background: black;">
-        <h1 style="text-align: center; color: white;">WYSIWYG Editor</h1>
-        <hr/>
+    <div class="jumbotron wysiwyg-content">
+        <h1 class="wysiwyg-header" style="font-size:40px;">Text Editor</h1>
+
         <form>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Enter Title" name="title" value="{{ request.GET.title }}">
             </div>
             <textarea id="sourceTA" rows="25" class="well" placeholder="Start writing here" name="text" value="{{ request.GET.text }}"></textarea>
-            <button class="btn btn-primary" type="submit" style="margin-top: 0.5em;">Save</button>
+            <hr/>
+            <button class="btn btn-primary wysiwyg-button" type="submit">Save</button>
         </form>
         <script>
             CKEDITOR.replace( 'text' );
             CKEDITOR.config.width = '100%';
             CKEDITOR.config.height = 500;
         </script>     
-        <hr/>
+
     </div>
     
 {% endblock content %}

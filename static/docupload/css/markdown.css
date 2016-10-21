@@ -1,0 +1,34 @@
+.markdown-block {
+    background: #EEE; 
+    height: 100%;
+}
+
+.markdown-button {
+    margin-bottom: 20px;
+}
+
+.markdown-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.markdown-form {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.markdown-header {
+    font-size: 40px;
+}
+
+#sourceTA {
+    display: inline-block;
+    width: 49%; 
+}
+
+#targetDiv {
+    float: right;
+    height: 682px;
+    overflow: scroll; 
+    width: 49%;   
+}
