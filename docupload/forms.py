@@ -14,5 +14,5 @@ class DocUploadForm(forms.ModelForm):
         ]
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Enter Title','class': 'form-control'}),
-            'description': forms.TextInput(attrs={'placeholder': 'Description','class': 'form-control'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description','class': 'form-control'}),
         }
