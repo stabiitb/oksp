@@ -12,6 +12,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-sm-1">Description</label>
+                <div class="col-sm-6 doc-input">
+                {{ form.description }} 
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="control-label col-sm-1">File</label>
                 <div class="col-sm-6 doc-input" style="padding-top: 7px;">
                 {{ form.doc_file }}
@@ -32,7 +38,7 @@
                     <div class="row alert alert-warning">
                         <div class="col-xs-12">
                             <h2><a href="/doc/{{ doc.id }}/" class="doc-header">{{ doc.name }}</a></h2>
-                            <p style="font-size: 17px;">Placeholder for description of document.</p>
+                            <p style="font-size: 17px;">{{ doc.description }}</p>
                             <a href="/doc/original/{{ doc.id }}/" class="btn btn-primary" role="button">Download Original</a>
                         </div>
                     </div>

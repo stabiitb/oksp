@@ -35,6 +35,7 @@ def markdown_editor(request):
     html = HTMLifier(doc_base_path=DOC_DIR)
     text = request.GET.get('text')
     title = request.GET.get('title')
+    description = request.GET.get('description')
     if text and title:
         #Save this file
         myfile = ContentFile(bytes(text, 'utf-8'))
@@ -42,6 +43,7 @@ def markdown_editor(request):
         filename, ext = html.convert(myfile)
         doc = Documentation(name=title,
                             doc_file=filename,
+                            description=description,
                             pub_date=datetime.now(),
                             extension=ext)
         doc.save()
@@ -51,6 +53,7 @@ def markdown_editor(request):
 
 def wysiwyg_editor(request):
     html = HTMLifier(doc_base_path=DOC_DIR)
+    description = request.GET.get('description')
     text = request.GET.get('text')
     title = request.GET.get('title')
     if text and title:
@@ -60,6 +63,7 @@ def wysiwyg_editor(request):
         filename, ext = html.convert(myfile)
         doc = Documentation(name=title,
                             doc_file=filename,
+                            description=description,
                             pub_date=datetime.now(),
                             extension=ext)
         doc.save()
@@ -77,6 +81,7 @@ def upload(request):
         if form.is_valid():
             filename, ext = html.convert(request.FILES['doc_file'])
             doc = Documentation(name=request.POST['name'],
+                                description=request.POST['description'],  
                                 doc_file=filename,
                                 pub_date=datetime.now(),
                                 extension=ext)
