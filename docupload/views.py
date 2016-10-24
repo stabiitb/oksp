@@ -81,7 +81,7 @@ def upload(request):
         if form.is_valid():
             filename, ext = html.convert(request.FILES['doc_file'])
             doc = Documentation(name=request.POST['name'],
-                                description=request.POST['description'],  
+                                description=request.POST['description'],
                                 doc_file=filename,
                                 pub_date=datetime.now(),
                                 extension=ext)
